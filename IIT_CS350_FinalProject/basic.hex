@@ -1,0 +1,5 @@
+3000	origin
+8000	max negative
+7FFF	max positive
+0000	zero (don't dump M[x3002])
+FFFF	-1
