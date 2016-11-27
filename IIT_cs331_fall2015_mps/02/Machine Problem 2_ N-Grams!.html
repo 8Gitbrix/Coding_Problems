@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://moss.cs.iit.edu/cs331/mp2.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<link href="./Machine Problem 2_ N-Grams!_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Machine Problem 2_ N-Grams!_files/main.css">
+    <title>Machine Problem 2: N-Grams!</title>
+  <script type="text/javascript" async="" src="./Machine Problem 2_ N-Grams!_files/embed.js"></script><style type="text/css"></style><script src="./Machine Problem 2_ N-Grams!_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+  <body>
+    <div id="pagewrap">
+      <h1>Machine Problem 2: N-Grams!</h1>
+      
+      <h2>Objectives</h2>
+<ol>
+<li>Practice using Python's built-in list and dictionary data structures.</li>
+<li>Learn how to use the <code>random</code> library for random item selection from a
+   sequence.</li>
+<li>Write functions to extract n-grams from text into data structures and use
+   those structures to generate random passages.</li>
+</ol>
+<h2>Reminder: Before starting ...</h2>
+<p>... you'll need to do <code>(git fetch upstream ; git merge upstream/master)</code> within
+your cloned repository to fetch my additions (consisting of template code and
+recent lecture examples).</p>
+<h2>Overview</h2>
+<p>An <em>n-gram</em> -- in the context of parsing natural languages such as English -- is
+a sequence of <em>n</em> consecutive tokens (e.g., words separated by whitespace) from
+a given passage of text. Based on the following passage:</p>
+<blockquote>
+<p>I really really like cake.</p>
+</blockquote>
+<p>We have the following 2-grams:</p>
+<pre><code>[('I', 'really'), ('really', 'really'), ('really', 'like'), ('like', 'cake.')]
+</code></pre>
+<p>And the following 3-grams:</p>
+<pre><code>[('I', 'really', 'really'),
+ ('really', 'really', 'like'),
+ ('really', 'like', 'cake.')]
+</code></pre>
+<p>(Note that I omit a 1-gram listing because it would merely be a list of all
+tokens in the original text.)</p>
+<p>Among other things, n-grams are useful for describing the vocabulary of and
+statistical correlation between tokens in a sample body of text (e.g., as taken
+from a book). We can use an n-gram model to determine the likelihood of finding
+a particular sequence of words after another. This information, in turn, can be
+used to generate passages of text that statistically mimic the sample.</p>
+<p>We can convert the above 3-gram list into the following lookup structure (i.e.,
+a dictionary mapping strings to lists of 2-tuples), where the first token of
+each n-gram maps to all sequences that follow it in the text:</p>
+<pre><code>{'I': [('really', 'really')],
+ 'really': [('really', 'like'), ('like', 'cake.')]}
+</code></pre>
+<p>We can now generate passages of text using the following method:</p>
+<ol>
+<li>Select a random key and use it as the start token of the passage. It will
+   also serve as the current token for the next step.</li>
+<li>Select a random sequence from the list associated with the current token and
+   append the sequence to the passage. The last token of the selected sequence
+   will be the new current token.</li>
+<li>If the current token is a key in the map then simply repeat step 2, otherwise
+   select another random key from the map as the current token and append it to
+   the passage before repeating step 2.</li>
+</ol>
+<p>E.g., we might start by selecting <code>'I'</code> in step (1), which gives us <code>('really',
+'really')</code> as our only choice in (2). The second <code>'really'</code> in that tuple is the
+new current token (which is a valid key), which takes us back to (2) and gives
+us a choice between two tuples. If we choose <code>('like', 'cake.')</code>, then we have
+<code>'cake.'</code> as our new current token --- it is not a key in the map, however, so
+we'd have to choose a new random key if we wanted to generate a longer
+passage. Either way, the passage we've generated thus far is <code>'I really really
+like cake.'</code> (which also happens to be the original passage).</p>
+<p>Here's a lengthier passage that could be generated from the 3-gram dictionary
+above -- note that for clarity I've added <code>*</code>'s every time a new random key is
+selected (i.e., when the previous token isn't a key in the dictionary):</p>
+<blockquote>
+<p>* really like cake. * I really really really like * really like cake. * I
+really really really like * really</p>
+</blockquote>
+<p>This gets more interesting when we build n-gram dictionaries from lengthier
+bodies of text. For instance, the following text was generated (with a little
+programmed embellishment for prettier capitalization and punctuation) from a
+3-gram dictionary extracted from Romeo's famous balcony monologue:</p>
+<blockquote>
+<p>Lamp her eyes were there they in their spheres till they in her eyes in all
+the fairest stars in all the heaven having some business do wear it is my
+love! O it is envious her cheek would through the heaven having some business
+do entreat her eyes were there they in their spheres till they in her eyes to.</p>
+</blockquote>
+<p>For reference, here is the dictionary entry for the token <code>'her'</code>:</p>
+<pre><code>'her': [('maid', 'art'),
+        ('maid', 'since'),
+        ('vestal', 'livery'),
+        ('eyes', 'to'),
+        ('eyes', 'were'),
+        ('head?', 'The'),
+        ('cheek', 'would'),
+        ('eyes', 'in'),
+        ('cheek', 'upon'),
+        ('hand!', 'O')],
+</code></pre>
+<p>(You can find the full text of Romeo's monologue in the file "<code>romeo.txt</code>" in
+the machine problem directory.)</p>
+<h2>Implementation Details</h2>
+<p>You will be implementing two functions: one to build an n-gram dictionary, and
+another to generate passages of text given an n-gram dictionary. The stubbed out
+functions are show below (with shortened docstrings):</p>
+<pre><code>def compute_ngrams(str, n=2):
+    """Returns an n-gram dictionary based on tokens from the given string.""""
+    pass
+
+def gen_passage(ngrams, start=None, min_length=100):
+    """Generates and returns a string based on the provided n-gram dictionary.""""
+    pass
+</code></pre>
+<p>Both functions are found in the <code>mps/02/ngrams.py</code> file in your class
+repository. Also in that file is a function that reads in the contents of a text
+file (as a large string), and code that demonstrates some APIs you'll likely
+find useful, discussed next:</p>
+<h3>Splitting strings</h3>
+<p>Already demonstrated during lecture and important to recall is the <code>split</code>
+method of a string, which will by default return a list of substrings demarcated
+by whitespace. E.g.,</p>
+<pre><code>&gt;&gt;&gt; 'I love cake'.split()
+['I', 'love', 'cake']
+</code></pre>
+<h3>Random selection</h3>
+<p>You will need to randomly select from sequences of different things (e.g.,
+dictionary keys and lists of tuples) in your code --- the <code>random</code> module makes
+this easy to do with the <code>choice</code> function. Given a sequence, the function will
+return a randomly chosen element. E.g.,</p>
+<pre><code>&gt;&gt;&gt; import random
+&gt;&gt;&gt; random.choice('I love cake'.split())
+'I'
+&gt;&gt;&gt; random.choice('I love cake'.split())
+'cake'
+</code></pre>
+<p>Note that the "<code>import random</code>" statement is already atop the provided
+file. You can use <code>random.choice</code> anywhere in your functions.</p>
+<h3>Joining together strings</h3>
+<p>Though it can also be accomplished using list comprehensions, another convenient
+API --- the string's <code>join</code> method --- allows us to concatenate a sequence of
+strings together using a specified separator. E.g.,</p>
+<pre><code>&gt;&gt;&gt; ' '.join(['I', 'like', 'cake'])
+'I like cake'
+&gt;&gt;&gt; '*'.join(['I', 'like', 'cake'])
+'I*like*cake'
+&gt;&gt;&gt; '***'.join(['I', 'like', 'cake'])
+'I***like***cake'
+</code></pre>
+<p>Putting it all together, we can do:</p>
+<pre><code>&gt;&gt;&gt; '-'.join(random.choice('I love cake'.split()) for _ in range(10))
+'I-love-love-I-cake-cake-love-I-I-cake'
+</code></pre>
+<p>Which effectively implements 1-gram based passage generation.</p>
+<h3>Testing</h3>
+<p>Towards the bottom of <code>ngrams.py</code> you will find code demonstrating how the
+<code>get_file_contents</code> function is used, and that contains sample calls to
+<code>compute_ngrams</code> and <code>gen_passage</code> based on command line arguments. You can
+leave these as is, though you might want to adjust some default parameters.</p>
+<p>You can run the script with the command "<code>python3 ngrams.py 3 test.txt</code>" on
+fourier, varying the number (which specifies the n-gram length) and text file
+name (which contains the body text). Two additional sample body texts are
+provided: <code>romeo.txt</code> contains Romeo's balcony soliloquy, and <code>peterpan.txt</code>
+contains the entire text of "Peter Pan", courtesy of <a href="http://gutenberg.org/">Project Gutenberg</a>.</p>
+<p>I recommend you leave the debug print statement in the program (the
+<code>pprint(ngrams)</code> line) and use the small <code>test.txt</code> file while testing. You
+should delete the 1-gram demo code right after you're sure how it works,
+however, as it'll just be in the way.</p>
+<h2>Evaluation</h2>
+<p>Your TA will evaluate your work by asking you to generate passages of text based
+on varying n-gram lengths and sample bodies of text. You should also be prepared
+to make some modifications to your passage generation methodology, and to
+explain parts of your implementation. An evaluation rubric will be provided
+in lab.</p>
+<h2>Finishing Up</h2>
+<p>When you're done, you'll need to:</p>
+<ol>
+<li>
+<p>Commit your work (remember, you can do this frequently while working on the
+   machine problem) with the command <code>git commit -am 'Commit message'</code></p>
+</li>
+<li>
+<p>Push your changes to BitBucket with <code>git push origin master</code></p>
+</li>
+</ol>
+<p>Check your BitBucket page in the browser to make sure your changes were pushed
+to the site.</p>
+      
+      <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Machine Problem 2_ N-Grams!_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'moss-cs-iit-edu';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+      <footer>
+        Last updated: Mon Sep 14 20:20:03 2015
+      </footer>
+    </div>
+  
+
+<div style="display: none; color: white; text-align: center; position: fixed; top: 0px; left: 0px; width: 100%; height: auto; min-width: 100%; min-height: auto; max-width: 100%; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif; cursor: pointer; padding: 5px; background-color: rgb(255, 143, 0);"><span style="color: white; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif;">You have turned off the paragraph player. You can turn it on again from the options page.</span><img src="chrome-extension://gfjopfpjmkcfgjpogepmdjmcnihfpokn/img/icons/icon-close_16.png" style="width: 20px; height: auto; min-width: 20px; min-height: auto; max-width: 20px; float: right; margin-right: 10px;"></div></body></html>

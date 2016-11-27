@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://moss.cs.iit.edu/cs331/mp4.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<link href="./Machine Problem 4_ Array-backed List ADT_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Machine Problem 4_ Array-backed List ADT_files/main.css">
+    <title>Machine Problem 4: Array-backed List ADT</title>
+  <script type="text/javascript" async="" src="./Machine Problem 4_ Array-backed List ADT_files/embed.js"></script><style type="text/css"></style><script src="./Machine Problem 4_ Array-backed List ADT_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+  <body>
+    <div id="pagewrap">
+      <h1>Machine Problem 4: Array-backed List ADT</h1>
+      
+      <h2>Objectives</h2>
+<ol>
+<li>Implement an array-backed list abstract data type (ADT)</li>
+<li>Practice using Python's object oriented features</li>
+<li>Learn how to support Python's built-in sequence operators</li>
+</ol>
+<h2>Reminder: Before starting ...</h2>
+<p>... you'll need to do <code>(git fetch upstream ; git merge upstream/master)</code> within
+your cloned repository to fetch my additions (consisting of template code and
+recent lecture examples).</p>
+<h2>Overview</h2>
+<p>For this machine problem you will implement a list ADT, comprising most of the
+list API we've been using over the past few weeks. As the backing store for
+your implementation you will use Python's builtin list, restricted to just the
+following operations:</p>
+<ul>
+<li>indexing; i.e., <code>lst[i]</code> and <code>lst[i] = x</code></li>
+<li>obtaining the length; i.e., <code>len(lst)</code></li>
+<li>appending an item to the end; i.e., <code>lst.append(x)</code></li>
+<li>deleting an item from the end; i.e., <code>del lst[i]</code></li>
+</ul>
+<h2>Implementation Details</h2>
+<p>You will find template files for your implementation in the <code>mps/04/</code> folder of
+your code repository. There are two files provided:</p>
+<ol>
+<li><code>arraylist.py</code>, which contains the start of the list ADT implementation
+   (completed during lecture). You will add methods to the <code>ArrayList</code> class
+   contained therein to implement the API described below.</li>
+<li><code>main.py</code>, </li>
+</ol>
+<p>The methods you add to the <code>ArrayList</code> will support the following operations
+(given that <code>lst</code>, <code>lst1</code>, and <code>lst2</code> is an instance of <code>ArrayList</code>):</p>
+<ol>
+<li><code>x in lst</code></li>
+<li><code>lst1 + lst2</code> (which returns a new instance of an <code>ArrayList</code>)</li>
+<li><code>len(lst)</code></li>
+<li><code>lst.count(x)</code></li>
+<li><code>del lst[i]</code></li>
+<li><code>lst.clear()</code></li>
+<li><code>lst1.extend(lst2)</code></li>
+<li><code>lst.insert(i, x)</code></li>
+<li><code>lst.remove(x)</code></li>
+<li><code>lst.pop([i])</code></li>
+</ol>
+<p>See
+<a href="https://docs.python.org/3.5/library/stdtypes.html#common-sequence-operations">https://docs.python.org/3.5/library/stdtypes.html#common-sequence-operations</a>
+and <a href="https://docs.python.org/3.5/library/stdtypes.html#mutable-sequence-types">https://docs.python.org/3.5/library/stdtypes.html#mutable-sequence-types</a>
+for a description of the above operations.</p>
+<h2>Evaluation</h2>
+<p>Please be ready to demo your program (on different ranges of input sizes) to
+your TA, and have your own Google Doc spreadsheet open in a browser window to
+show how you go from table data to chart.</p>
+<h2>Finishing Up</h2>
+<p>When you're done, you'll need to:</p>
+<ol>
+<li>
+<p>Commit your work (remember, you can do this frequently while working on the machine problem) with the command <code>git commit -am 'Commit message'</code></p>
+</li>
+<li>
+<p>Push your changes to BitBucket with <code>git push origin master</code></p>
+</li>
+</ol>
+<p>Check your BitBucket page in the browser to make sure your changes were pushed to the site.</p>
+      
+      <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Machine Problem 4_ Array-backed List ADT_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'moss-cs-iit-edu';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+      <footer>
+        Last updated: Sat Oct 10 00:14:33 2015
+      </footer>
+    </div>
+  
+
+<div style="display: none; color: white; text-align: center; position: fixed; top: 0px; left: 0px; width: 100%; height: auto; min-width: 100%; min-height: auto; max-width: 100%; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif; cursor: pointer; padding: 5px; background-color: rgb(255, 143, 0);"><span style="color: white; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif;">You have turned off the paragraph player. You can turn it on again from the options page.</span><img src="chrome-extension://gfjopfpjmkcfgjpogepmdjmcnihfpokn/img/icons/icon-close_16.png" style="width: 20px; height: auto; min-width: 20px; min-height: auto; max-width: 20px; float: right; margin-right: 10px;"></div></body></html>

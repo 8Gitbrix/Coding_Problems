@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://moss.cs.iit.edu/cs331/mp1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<link href="./Machine Problem 1_ Version Control_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Machine Problem 1_ Version Control_files/main.css">
+    <title>Machine Problem 1: Version Control</title>
+  <script type="text/javascript" async="" src="./Machine Problem 1_ Version Control_files/embed.js"></script><style type="text/css"></style><script src="./Machine Problem 1_ Version Control_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+  <body>
+    <div id="pagewrap">
+      <h1>Machine Problem 1: Version Control</h1>
+      
+      <h2>Objectives</h2>
+<ol>
+<li>Log in to fourier (the course server) with SSH</li>
+<li>Learn to use a terminal multiplexer (<a href="http://tmux.sourceforge.net/">tmux</a>)</li>
+<li>Clone the public, read-only course repository from Bitbucket</li>
+<li>Obtain write access to our shared, private repository</li>
+<li>Commit changes to your local repository</li>
+<li>Push changes to your private repository</li>
+<li>Pull/Merge updates from the public repository</li>
+<li>Edit files on fourier</li>
+<li>Run the Python interpreter</li>
+</ol>
+<h2>Overview</h2>
+<p>You'll write plenty of code this semester, but before you get to it you first
+need to learn how to edit and submit your work. We'll cover those steps here.</p>
+<p>To keep this writeup short we'll do lots of interactive demonstrations, but the
+critical steps and commands will be  documented for future reference.</p>
+<h2>fourier.cs.iit.edu</h2>
+<p>The CS department Linux course server --- fourier.cs.iit.edu --- has been set up
+to provide you with a consistent environment on which to to write, test, and
+submit your work. You can certainly work on machine problems on your own
+computer if you have Python and Git (the version control system we'll be using)
+installed, but for this writeup we'll assume you're logged into fourier.</p>
+<p>After obtaining your login information (your username is typically the same as
+the one you use for MyIIT, and your password is set to your CWID), you'll log in
+to fourier with an SSH client. At the terminal, you can do this with the
+command:</p>
+<pre><code>ssh username@fourier.cs.iit.edu
+</code></pre>
+<p>On Windows you may need to start up a separate SSH client such as <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a> if you don't
+have a command line client. Please ask a TA for help if you need it.</p>
+<p>After logging in, resist the overwhelming urge to immediately start being
+productive! Repeat after me: TERMINAL MULTIPLEXERS ARE AWESOME. You'll learn
+about them next.</p>
+<h2>tmux</h2>
+<p>MPs require multiple coding, testing, and debugging sessions to complete, which
+require multiple corresponding login sessions on fourier. Each time you login,
+you'll have to navigate into the appropriate work directory, re-open source
+file(s) in editors, start up debugging sessions, run tests to obtain output,
+etc. All before you can even <em>think</em> about getting work done.</p>
+<p>Ugh.</p>
+<p>All the above constitute annoying <em>cognitive overhead</em>, and we can all use less
+of that (especially given how difficult it is for most students to allocate time
+to sit down and work on coursework in the first place).</p>
+<p>Wouldn't it be great if you could set things up --- your editing windows,
+debuggers, output position --- <em>just the way you like it</em>, <strong><em>one time</em></strong>, then
+have it remain that way each time you log back in? Heck yeah. That's where
+terminal multiplexers fit in.</p>
+<p>Technically, a terminal multiplexer is a program that:</p>
+<ol>
+<li>Allows you to create and manage multiple terminal sessions from a single
+   screen. You can run a different program in each session (e.g., editor,
+   debugger, shell).</li>
+<li>Continues to run after you log out, so when you reconnect you can simply pick
+   up where you left off.</li>
+</ol>
+<p>Less technically, a terminal multiplexer = bliss.</p>
+<p>To start tmux, just use the command <code>tmux</code>. I'll walk you through a few demo
+sessions, but the important keys are as follows:</p>
+<ul>
+<li><code>C-b</code>: default prefix key (prefixes all following command keys)</li>
+<li><code>c</code>: create a new window</li>
+<li><code>n</code>/<code>p</code>: change to the next/previous window</li>
+<li><code>"</code>: split the current window</li>
+<li><code>&lt;space&gt;</code>: arrange the panes in the current window according to some preset</li>
+<li><code>o</code>: change to the next pane in the current window</li>
+<li><code>!</code>: break the current pane out of the current window</li>
+<li><code>?</code>: list all key bindings</li>
+<li><code>d</code>: detach from tmux</li>
+</ul>
+<p>After detaching from a session, the following command will re-attach you to it
+(given that you only have one tmux session running):</p>
+<pre><code>tmux at
+</code></pre>
+<p>You should <strong>NOT</strong> create a new tmux session (with the command <code>tmux</code>) each time you
+log in. Instead, you need only do this once --- on subsequent logins you will
+simply reattach to your existing session with <code>tmux at</code>.</p>
+<p>So... Logged in: check. tmux session attached: check. Moving on.</p>
+<h2>Git / Bitbucket</h2>
+<p><a href="http://git-scm.com/">Git</a> is a <a href="http://betterexplained.com/articles/intro-to-distributed-version-control-illustrated/">distributed version control system</a>, and
+<a href="https://bitbucket.org/">Bitbucket</a> is a free Git repository hosting service. You'll use the first to
+manage all your code and the second to share it with me.</p>
+<p>Here are the steps for setting things up --- we'll walk you through them
+interactively. </p>
+<ol>
+<li>
+<p>Clone the private repository (which is owned by the instructor) --- you
+   must've accepted an e-mail invitation from the instructor <em>and</em> connected the
+   repository to either a pre-exising or new account on Bitbucket for this to
+   work:</p>
+<pre><code>git clone https://bitbucket.org/michaelee/cs331-fall2015-username.git
+</code></pre>
+</li>
+<li>
+<p>Set your "upstream" repository to the official public course repository (also
+   owned by the instructor's account). This makes it so you can grab updates
+   from the official repository in the future.</p>
+<pre><code>cd cs331-fall2015-username
+git remote add upstream https://bitbucket.org/michaelee/cs331.git
+</code></pre>
+</li>
+<li>
+<p>Fetch the initial contents of the public repository, merge them into your
+   local branch, then push them to your private repository:</p>
+<pre><code>git fetch upstream
+git merge upstream/master
+git push origin master
+</code></pre>
+</li>
+</ol>
+<p>Now you can make changes to files within your local repository and commit
+them. Add your information to the "README.md" file (you can scan ahead to the
+section on editors if you need some help choosing a suitable text editor), then
+run this command:</p>
+<pre><code>git commit -am "Adding information to README"
+</code></pre>
+<p>Now push your commit to the private repository on Bitbucket:</p>
+<pre><code>git push origin master
+</code></pre>
+<p>This previous step is effectively how you "submit" your work, as I will be
+pulling from this private shared repository after the submission deadline to get
+your changes. <strong>If you don't <code>push</code>, I won't see (and can't grade) your work!</strong></p>
+<p>That said, you don't need to <code>push</code> after each <code>commit</code>. I recommend you <code>commit</code>
+frequently while coding --- a <code>push</code> will send <em>all commits</em> you've made to the
+remote repository.</p>
+<p>Finally: before starting each machine problem, you should make sure all your
+local changes are commited, then fetch and merge any additions to the public
+course repository with <code>git fetch upstream; git merge upstream/master</code>. We'll
+remind you to do this in each machine problem writeup.</p>
+<h2>On editors</h2>
+<p>A good programmer has strong opinions about programming languages, coding
+conventions, and text editors. There are only two UNIX text editors worth
+learning, and learning well: <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://www.vim.org/">Vim</a>. Both are installed on
+fourier. <a href="http://c2.com/cgi/wiki?EmacsVsVi">Pick one</a> and learn a new feature every day.</p>
+<p>If you can't be bothered investing time and energy into a tool that you'll use
+more than any other and will save you countless keystrokes and hours, then use
+the <a href="http://www.nano-editor.org/">nano editor</a> instead. It's also on fourier. I don't recommend it.</p>
+<h2>Running Python Scripts</h2>
+<p>For the rest of this machine problem you'll work in the "<code>mps/01</code>" subdirectory
+of your repository. In there, you'll find the file "hello.py", which contains a
+simple Python program.</p>
+<p>You can run the program with the following command:</p>
+<pre><code>python3 hello.py
+</code></pre>
+<p>Note the use of <code>python3</code> (and not <code>python</code>) as the command for invoking the interpreter!
+(The <code>python</code> command runs version 2 of the interpreter, which is not what we
+want --- you can try it and note the error output.)</p>
+<h2>A Splash of Code</h2>
+<p>For this machine problem we ask that you edit the "hello.py" script and add code
+so that:</p>
+<ol>
+<li>The user is prompted to enter two additional pieces of information (e.g.,
+   where they are from, favorite color), which are stored in variables</li>
+<li>The output of the script --- displayed after all input is complete ---
+   incorporates this information in some meaningful way (e.g., in a lengthier
+   "welcome" message).</li>
+</ol>
+<p>Run and test your program to make sure it works. When done, commit your work
+with an appropriate commit message, and push your changes to BitBucket.</p>
+<h2>Finishing up</h2>
+<p>To earn the points for this machine problem, you must have <strong>pushed your
+(working) changes to the "README.md" and "hello.py" files to your private
+repository on Bitbucket</strong>. This is also a prerequisite for working on all
+subsequent machine problems, so please make sure you know how to do this!</p>
+<p>And the big procedural takeaways:</p>
+<ol>
+<li>Before starting a machine problem, <code>(git fetch upstream ; git merge
+   upstream/master)</code></li>
+<li>Commit often, and to submit, <code>git push origin master</code></li>
+<li><code>python3 FILENAME</code> to run the interpreter on the named Python script.</li>
+</ol>
+      
+      <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Machine Problem 1_ Version Control_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 342px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'moss-cs-iit-edu';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+      <footer>
+        Last updated: Thu Sep  3 16:45:07 2015
+      </footer>
+    </div>
+  
+
+<div style="display: none; color: white; text-align: center; position: fixed; top: 0px; left: 0px; width: 100%; height: auto; min-width: 100%; min-height: auto; max-width: 100%; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif; cursor: pointer; padding: 5px; background-color: rgb(255, 143, 0);"><span style="color: white; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif;">You have turned off the paragraph player. You can turn it on again from the options page.</span><img src="chrome-extension://gfjopfpjmkcfgjpogepmdjmcnihfpokn/img/icons/icon-close_16.png" style="width: 20px; height: auto; min-width: 20px; min-height: auto; max-width: 20px; float: right; margin-right: 10px;"></div></body></html>

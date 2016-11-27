@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://moss.cs.iit.edu/cs331/mp3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<link href="./Machine Problem 3_ Sort Algorithm Timing_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Machine Problem 3_ Sort Algorithm Timing_files/main.css">
+    <title>Machine Problem 3: Sort Algorithm Timing</title>
+  <script type="text/javascript" async="" src="./Machine Problem 3_ Sort Algorithm Timing_files/embed.js"></script><style type="text/css"></style><script src="./Machine Problem 3_ Sort Algorithm Timing_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+  <body>
+    <div id="pagewrap">
+      <h1>Machine Problem 3: Sort Algorithm Timing</h1>
+      
+      <h2>Objectives</h2>
+<ol>
+<li>Use the <code>timeit</code> module to determine execution time</li>
+<li>Systematically record and tabulate the actual runtimes of different sorting
+   algorithms</li>
+<li>Create a graph based on the aforementioned results</li>
+</ol>
+<h2>Reminder: Before starting ...</h2>
+<p>... you'll need to do <code>(git fetch upstream ; git merge upstream/master)</code> within
+your cloned repository to fetch my additions (consisting of template code and
+recent lecture examples).</p>
+<h2>Overview</h2>
+<p>For this machine problem you will use the <code>timeit</code> module to determine the
+runtime performance of at least 4 different sort algorithms. They will include:</p>
+<ol>
+<li>Insertion sort.</li>
+<li>"Divide" sort (presented in class as an intro to the divide-and-conquer idea).</li>
+<li>Either <a href="http://interactivepython.org/runestone/static/pythonds/SortSearch/TheBubbleSort.html">Bubble</a> or <a href="http://interactivepython.org/runestone/static/pythonds/SortSearch/TheSelectionSort.html">Selection</a> sort (links are
+   to the relevant sections in the textbook, which contain code for their
+   implementations).  </li>
+<li>Merge sort.</li>
+</ol>
+<p>Your finished program will run each of the sort functions on randomly shuffled
+lists of sizes ranging from 100 up to at least 1000 (you can go higher, if
+you've the time and patience) and produce a table relating input size to time
+taken. </p>
+<p>Using the table, you will also create a line chart as shown below to visualize
+the data. Here's the <a href="https://docs.google.com/spreadsheets/d/1kT5zNdjuXQHeAGBjhYiu0ZvLOd-6YhHJSsrUbbhPsaI/edit?usp=sharing">Google Doc spreadsheet</a> containing the
+(randomly generated) sample data and chart --- note that the raw table text is
+in the first column of the spreadsheet. Feel free to delete or tweak the
+trendlines.</p>
+<p><img alt="Line chart" src="./Machine Problem 3_ Sort Algorithm Timing_files/sort-timings.png"></p>
+<h2>Implementation Details</h2>
+<p>You will find template files for your implementation in the <code>mps/03/</code> folder of
+your code repository. There are two files provided:</p>
+<ol>
+<li><code>sort_algs.py</code>, which contains three of the four sort algorithms you will be
+   timing. You should add your own sort function(s) to the end of this file.</li>
+<li><code>timing.py</code>, which will contain the code that actually performs the
+   timing. Note that it already contains some code that demonstrates how to use
+   the <code>timeit</code> and <code>random</code> modules and string <code>format</code> function together to
+   time insertion sort on a 100-element list and print out the elapsed time.</li>
+</ol>
+<p>Using the provided code as a starting point, you should implement a loop in
+<code>timing.py</code> that runs all your sort algorithms on different input list sizes
+(using <code>timeit</code>), and produces output that looks like the following (note that
+the numbers below are made up --- yours will be quite different!):</p>
+<pre><code>    n      Insertion         Divide      Selection          Merge
+  100        578.390        472.008        395.843        275.239
+  200       1117.436        875.089        709.704        451.837
+  300       1639.741       1278.525       1199.841        827.004
+  400       2126.496       1906.369       1275.137        848.396
+  500       2722.177       2448.966       1647.238       1092.479
+  600       3105.818       2483.947       1851.474       1337.917
+  700       4179.838       3283.103       2597.372       1758.553
+  800       4737.605       3259.058       2424.837       1904.295
+  900       4753.191       3783.393       3502.652       2110.298
+ 1000       5428.979       4801.436       3348.855       2598.748
+ 1100       6593.379       5260.724       3366.931       2388.436
+ 1200       6807.778       5608.857       4239.314       2457.239
+ 1300       6681.834       5255.108       3989.374       3286.116
+ 1400       7291.231       6597.646       5266.842       3071.135
+ 1500       8656.742       6647.262       5766.374       4434.380
+ 1600       9114.850       7157.225       6084.910       4611.567
+ 1700       9749.204       6823.686       5369.894       4844.763
+ 1800       9500.038       8817.892       6086.137       4159.674
+ 1900       9827.107       8136.346       5708.818       4670.518
+ 2000      10702.127       9009.059       6800.682       4169.999
+</code></pre>
+<p>The string <code>format</code> method is very useful for generating pretty output. You can
+read through the
+<a href="https://docs.python.org/3.5/library/string.html#format-string-syntax">Python documentation on the format string syntax</a> for details,
+and check out the following few examples for ideas:</p>
+<pre><code>&gt;&gt;&gt; print(('{:&gt;5}'+'{:&gt;10}'*4).format('n', 'baq', 'bar', 'bas', 'bat'))
+    n       baq       bar       bas       bat
+
+&gt;&gt;&gt; print(('{:5d}'+'{:10.2f}'*4).format(100, 0.1, 0.2, 0.3, 0.4))
+  100      0.10      0.20      0.30      0.40
+</code></pre>
+<p>To run your program, simply do <code>python timing.py</code> at the command line. (Note
+that you will not need to run the interpreter on the <code>sort_algs.py</code> file, as it
+is imported and used as a module within the <code>timing.py</code> script.)</p>
+<h2>Evaluation</h2>
+<p>Please be ready to demo your program (on different ranges of input sizes) to
+your TA, and have your own Google Doc spreadsheet open in a browser window to
+show how you go from table data to chart.</p>
+<h2>Finishing Up</h2>
+<p>When you're done, you'll need to:</p>
+<ol>
+<li>
+<p>Commit your work (remember, you can do this frequently while working on the machine problem) with the command <code>git commit -am 'Commit message'</code></p>
+</li>
+<li>
+<p>Push your changes to BitBucket with <code>git push origin master</code></p>
+</li>
+</ol>
+<p>Check your BitBucket page in the browser to make sure your changes were pushed to the site.</p>
+      
+      <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Machine Problem 3_ Sort Algorithm Timing_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'moss-cs-iit-edu';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+      <footer>
+        Last updated: Sun Oct  4 01:42:39 2015
+      </footer>
+    </div>
+  
+
+<div style="display: none; color: white; text-align: center; position: fixed; top: 0px; left: 0px; width: 100%; height: auto; min-width: 100%; min-height: auto; max-width: 100%; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif; cursor: pointer; padding: 5px; background-color: rgb(255, 143, 0);"><span style="color: white; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif;">You have turned off the paragraph player. You can turn it on again from the options page.</span><img src="chrome-extension://gfjopfpjmkcfgjpogepmdjmcnihfpokn/img/icons/icon-close_16.png" style="width: 20px; height: auto; min-width: 20px; min-height: auto; max-width: 20px; float: right; margin-right: 10px;"></div></body></html>

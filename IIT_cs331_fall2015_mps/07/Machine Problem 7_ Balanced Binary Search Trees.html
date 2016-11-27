@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://moss.cs.iit.edu/cs331/mp7.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<link href="./Machine Problem 7_ Balanced Binary Search Trees_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Machine Problem 7_ Balanced Binary Search Trees_files/main.css">
+    <title>Machine Problem 7: Balanced Binary Search Trees</title>
+  <script type="text/javascript" async="" src="./Machine Problem 7_ Balanced Binary Search Trees_files/embed.js"></script><style type="text/css"></style><script src="./Machine Problem 7_ Balanced Binary Search Trees_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+  <body>
+    <div id="pagewrap">
+      <h1>Machine Problem 7: Balanced Binary Search Trees</h1>
+      
+      <h2>Objectives</h2>
+<ol>
+<li>Use the recursive-helper-function pattern to implement binary search tree
+   functions (insertion, deletion, search, etc.)</li>
+<li>Understand how to use rotations to maintain a balanced binary search tree
+   (specifically, an AVL tree)</li>
+<li>Understand how methods annotated with <code>@staticmethod</code> differ from regular
+   methods in Python</li>
+<li>Complete the balanced binary search tree implementation.</li>
+</ol>
+<h2>Reminder: Before starting ...</h2>
+<p>... you'll need to do <code>(git fetch upstream ; git merge upstream/master)</code> within
+your cloned repository to fetch my additions (consisting of template code and
+recent lecture examples).</p>
+<h2>Overview</h2>
+<p>For this machine problem you will complete the implementation of the balanced
+binary search tree implementation started in lecture. The base code can be found
+in the <code>mps/07/bstree.py</code> file.</p>
+<p>You will need to add code to the following methods:</p>
+<ul>
+<li><code>add</code></li>
+<li><code>rebalance</code></li>
+<li><code>contains</code></li>
+<li><code>remove</code></li>
+</ul>
+<p>Your <code>add</code> and <code>remove</code> implementations must, in the end, always leave the
+binary search tree strictly balanced --- such that all nodes in the tree have
+subtrees differing in height by a maximum of 1. We recommend, however, that you
+start with an unbalanced <code>remove</code> implementation first (to ensure correctness)
+before moving onto balancing --- you may add additional methods (static or not)
+to help distribute the workload. </p>
+<p>The <a href="http://interactivepython.org/runestone/static/pythonds/Trees/AVLTreeImplementation.html">textbook's description of AVL Trees</a> should prove helpful,
+though the book makes use of a "balance factor" instead of directly comparing
+heights of subtrees as we did in class. The
+<a href="https://en.wikipedia.org/wiki/AVL_tree#Deletion">Wikipedia section on deletion-rebalancing</a> may also be helpful
+(especially for visualizations), though the implementation shown there is an
+iterative (as opposed to recursive) one.</p>
+<p>For your convenience, the default <code>__repr__</code> method of both the BSTree class
+itself and of its constituent Nodes make use of the <code>_tree_repr</code> (breadth-first)
+method. This should make it much easier to test and debug your work at the REPL;
+if you want to test your code on larger inputs you may wish to uncomment the
+following line in <code>__repr__</code> to use the list-based representation (also comment
+out the original line, of course):</p>
+<pre><code>return repr(list(self))
+</code></pre>
+<h2>Extra Credit</h2>
+<p>For extra credit (up to 20% additional points on this machine problem @ 10%
+each), you can implement the following additions:</p>
+<ol>
+<li>
+<p>Instead of calling the <code>height</code> method everytime the height of a subtree is
+   needed, add a <code>height</code> attribute to each node, which is populated on creation
+   and <em>only updated as necessary</em> (i.e., on rotations, insertions, and
+   deletions). This attribute will allow the <code>height</code> method to <em>be entirely
+   removed</em>.</p>
+</li>
+<li>
+<p>Modify the <code>_tree_repr</code> method so as to improve the tree visualization; e.g.,
+   by incorporating ASCII art to indicate how nodes are related. The following
+   might be the updated output for a small, balanced tree:</p>
+<pre><code>             5
+        /----+----\
+       2           7
+    /--+        /--+--\
+   1           6       9
+</code></pre>
+</li>
+</ol>
+<h2>Finishing Up</h2>
+<p>When you're done, you'll need to:</p>
+<ol>
+<li>
+<p>Commit your work (remember, you can do this frequently while working on the machine problem) with the command <code>git commit -am 'Commit message'</code></p>
+</li>
+<li>
+<p>Push your changes to BitBucket with <code>git push origin master</code></p>
+</li>
+</ol>
+<p>Check your BitBucket page in the browser to make sure your changes were pushed to the site.</p>
+      
+      <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Machine Problem 7_ Balanced Binary Search Trees_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'moss-cs-iit-edu';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+      <footer>
+        Last updated: Mon Nov 23 14:28:39 2015
+      </footer>
+    </div>
+  
+
+<div style="display: none; color: white; text-align: center; position: fixed; top: 0px; left: 0px; width: 100%; height: auto; min-width: 100%; min-height: auto; max-width: 100%; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif; cursor: pointer; padding: 5px; background-color: rgb(255, 143, 0);"><span style="color: white; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif;">You have turned off the paragraph player. You can turn it on again from the options page.</span><img src="chrome-extension://gfjopfpjmkcfgjpogepmdjmcnihfpokn/img/icons/icon-close_16.png" style="width: 20px; height: auto; min-width: 20px; min-height: auto; max-width: 20px; float: right; margin-right: 10px;"></div></body></html>

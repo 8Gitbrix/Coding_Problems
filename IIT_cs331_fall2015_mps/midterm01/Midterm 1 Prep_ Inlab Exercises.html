@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://moss.cs.iit.edu/cs331/midtermprep1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<link href="./Midterm 1 Prep_ Inlab Exercises_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Midterm 1 Prep_ Inlab Exercises_files/main.css">
+    <title>Midterm 1 Prep: Inlab Exercises</title>
+  <script type="text/javascript" async="" src="./Midterm 1 Prep_ Inlab Exercises_files/embed.js"></script><style type="text/css"></style><script src="./Midterm 1 Prep_ Inlab Exercises_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+  <body>
+    <div id="pagewrap">
+      <h1>Midterm 1 Prep: Inlab Exercises</h1>
+      
+      <h2>Overview</h2>
+<p>Choose 3 of the 10 functions described in the "Exercises" section to complete
+and demonstrate to your TA for credit during the lab session. If you finish
+early, I recommend you work through the rest of the exercises for additional
+practice.</p>
+<h2>Exercises</h2>
+<p>You will find the following code in the <code>mps/midterm01/exercises.py</code> file after
+fetching and merging changes from BitBucket. Replace <code>pass</code> with your own
+working code for at least 3 of the 10 functions.</p>
+<pre><code>def times_table(n, upto):
+    """Returns a list of tuples that represent the "times-table" of `n`, up to (and
+    including) the multiple `upto`. E.g., the call `times_table(5, 4)` should
+    produce the result `[(5, 1, 5), (5, 2, 10), (5, 3, 15), (5, 4, 20)]`
+
+    """
+    pass
+
+def time_reverse(nitems, ntimes):
+    """Returns the number of seconds it takes to reverse a list of `nitems` items
+    `ntimes` times. Should not make use of the `timeit` module --- instead,
+    should use the `time` function in the `time` module.
+
+    """
+    pass
+
+def shuffle(l):
+    """Given a list, "shuffles" it by exchanging items at two randomly generated
+    indexes a number of times equal to twice the number of items in the list.
+    `random.shuffle` should not be used, but `random.randrange` can be used to
+    generate random index values.
+
+    """
+    pass
+
+def is_permutation(s, t):
+    """Returns true if the sequence `s` is a permutation of the sequence `t`, i.e.,
+    if `s` is the same length as `t` and contains all the same elements the same
+    number of times (though not necessarily in the same order).
+
+    """
+    pass
+
+def inverted(d):
+    """Given a dictionary `d`, returns a new dictionary where the values of `d` are
+    keys, and the corresponding entries are lists of keys that mapped to the
+    values in `d`. E.g., calling this function with the argument `{1: 2, 2: 3,
+    3: 2}` will return `{2: [1, 3], 3: [2]}`.
+
+    """
+    pass
+
+def count_each(l):
+    """Given a sequence, returns a dictionary containing each item in the sequence
+    as a key whose value is the number of times that item appears in the
+    sequence. E.g., calling this function with `'hello there'` will return
+    `{'e': 3, 'r': 1, 'h': 2, ' ': 1, 'l': 2, 'o': 1, 't': 1}`.
+
+    """
+    pass
+
+def avg_attempts(n_trials, success_rate=0.5):
+    """Simulates an event with a success rate of `success_rate` (which is a fraction
+    between 0.0 and 1.0) `n_trials` times, and returns the average number of
+    attempts before 'succeeding' in each event. Whether an event "succeeds" can
+    be determined by checking whether a random number (generated with
+    `random.random()`, say) is greater than or equal to `success_rate`. E.g.,
+    calling this function with `n_trials`=1000 and `success_rate`=0.5 will
+    return roughly 1.0.
+
+    """
+    pass
+
+def ranked_list(d):
+    """Called with a list where all keys map to comparable values (e.g., numbers),
+    returns a list containing key, value tuples, ordered by the values (in
+    descending order). E.g., called with `{'John': 3.8, 'Mary': 3.95, 'Jim':
+    3.6, 'Jose': 3.7}`, will return `[('Mary', 3.95), ('John', 3.8), ('Jose',
+    3.7), ('Jim', 3.6)]`.
+
+    """
+    pass
+
+def piglatinify(s):
+    """Called with a string of whitespace separated words, will return the Pig Latin
+    version of the string. See https://en.wikipedia.org/wiki/Pig_Latin for the
+    rules on transforming English to Pig Latin (use the basic rules). E.g.,
+    called with 'I love to eat pretty cakes', should return 'Iyay ovelay otay
+    eatyay ettypray akescay'.
+
+    """
+    pass
+
+def histogram(ns, scale=10, char='X'):
+    """Prints a vertical histogram of the numeric values in the sequence `ns`,
+    scaled according to the maximum value in `ns`, using the character
+    `char`. E.g., called as `histogram([1, 2, 3, 4, 5], 5, 'X'), should
+    output:
+
+                X
+              X X
+            X X X
+          X X X X
+        X X X X X
+
+    Called as `histogram([43, 65, 97, 33, 22], 8, 'O')`, should output:
+
+            O
+            O
+            O
+          O O
+          O O
+        O O O
+        O O O O
+        O O O O O
+    """
+    pass
+</code></pre>
+<h2>Evaluation</h2>
+<p>After writing your code, you can simply run <code>python</code> in the same folder as your
+code, then within the REPL do <code>from exercises import *</code> --- you can now test
+your functions by calling them directly from the REPL. E.g., see the following
+session log:</p>
+<pre><code>&gt;&gt;&gt; from exercises import *
+&gt;&gt;&gt; times_table(3, 9)
+[(3, 1, 3), (3, 2, 6), (3, 3, 9), (3, 4, 12), (3, 5, 15), (3, 6, 18), (3, 7, 21), (3, 8, 24), (3, 9, 27)]
+&gt;&gt;&gt; piglatinify('Hello there')
+'ellohay erethay'
+&gt;&gt;&gt; quit()
+</code></pre>
+<p>Note that if you make changes to your file you will need to restart the REPL to
+test your modifications. As an alternative, you can manually reimport your
+module and use it as follows:</p>
+<pre><code>&gt;&gt;&gt; from importlib import reload
+&gt;&gt;&gt; import exercises
+&gt;&gt;&gt; exercises.avg_attempts(100)
+1.15
+&gt;&gt;&gt; # make some changes to the file
+&gt;&gt;&gt; reload(exercises)
+&lt;module 'exercises' from './cs331/mps/midterm01/exercises.py'&gt;
+&gt;&gt;&gt; exercises.avg_attempts(100)
+0.92
+&gt;&gt;&gt; quit()
+</code></pre>
+<h2>Solutions</h2>
+<p>Reference solutions to all exercises will be posted on the course website by 5PM
+on October 20th.</p>
+      
+      <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Midterm 1 Prep_ Inlab Exercises_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'moss-cs-iit-edu';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+      <footer>
+        Last updated: Mon Oct 19 12:50:35 2015
+      </footer>
+    </div>
+  
+
+<div style="display: none; color: white; text-align: center; position: fixed; top: 0px; left: 0px; width: 100%; height: auto; min-width: 100%; min-height: auto; max-width: 100%; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif; cursor: pointer; padding: 5px; background-color: rgb(255, 143, 0);"><span style="color: white; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, Geneva, sans-serif;">You have turned off the paragraph player. You can turn it on again from the options page.</span><img src="chrome-extension://gfjopfpjmkcfgjpogepmdjmcnihfpokn/img/icons/icon-close_16.png" style="width: 20px; height: auto; min-width: 20px; min-height: auto; max-width: 20px; float: right; margin-right: 10px;"></div></body></html>

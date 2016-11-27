@@ -1,0 +1,191 @@
+body {
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  color: #666;
+}
+
+pre, code {
+  font-family: 'Source Code Pro';
+}
+
+pre {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* STRUCTURE */
+
+#pagewrap {
+  padding: 5px;
+  width: 960px;
+  margin: 20px auto;
+}
+
+header {
+  /* height: 100px; */
+  padding: 0 15px;
+}
+
+#announcements {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 5px 0px;
+  margin: 0px 0px 15px 0px;
+}
+
+#announcements h2 {
+  margin: 5px 0px 10px;
+}
+
+#announcements h3 {
+  padding: 5px 0px;
+  margin: 0px;
+}
+
+#announcements h3 ~ h3 {
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+}
+
+#calendar {
+  width: 280px;
+  float: left;
+  padding: 5px 15px;
+}
+
+#assignments {
+  width: 300px; /* Account for margins + border values */
+  float: left;
+  padding: 5px 15px;
+  margin: 0px 5px 0px 5px;
+}
+
+#etc {
+  width: 280px;
+  padding: 5px 15px;
+  float: left;
+}
+
+footer {
+  clear: both;
+  padding: 10px 0px;
+  margin-top: 25px;
+}
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* for 980px or less */
+@media screen and (max-width: 980px) {
+
+  #pagewrap {
+    width: 94%;
+  }
+  #calendar {
+    width: 41%;
+    padding: 1% 4%;
+  }
+  #assignments {
+    width: 41%;
+    padding: 1% 4%;
+    margin: 0px 0px 5px 5px;
+    float: right;
+  }
+
+  #etc {
+    clear: both;
+    padding: 1% 4%;
+    width: auto;
+    float: none;
+  }
+
+  header, footer {
+    padding: 1% 4%;
+  }
+}
+
+/* for 700px or less */
+@media screen and (max-width: 600px) {
+
+  #calendar {
+    width: auto;
+    float: none;
+  }
+
+  #assignments {
+    width: auto;
+    float: none;
+    margin-left: 0px;
+  }
+
+  #etc {
+    width: auto;
+    float: none;
+  }
+
+}
+
+/* for 480px or less */
+@media screen and (max-width: 480px) {
+  
+  header {
+    height: auto;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  #etc {
+    display: none;
+  }
+
+}
+
+h1 {
+  color: #de5340;
+}
+
+h2, h3, h4 {
+  color: #4b7faf;
+}
+
+a:link    { color: #4b7faf }
+a:visited { color: #4b7faf }
+a:hover   { color: #4b7faf }
+a:active  { color: #4b7faf }
+
+#calendar {
+  background: #f0efef;
+}
+#etc {
+  background: #f0efef;
+}
+header, #calendar, #assignments, #etc {
+  margin-bottom: 5px;
+}
+
+footer {
+  border-top: 1px solid #ccc;
+  background: #f0f0f0;
+  text-align: center;
+}
+
+@media print {
+   body {
+     color: black;
+   }
+
+   h1, h2, h3, h4 {
+     color: black;
+   }
+
+   a:link, a:visited {
+     color: #333;
+   }
+}
+  
+
+/*
+#pagewrap, header, #calendar, #assignments, #etc, footer {
+  border: solid 1px #ccc;
+}
+*/
